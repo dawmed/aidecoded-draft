@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AIDecoded - Explore cutting-edge AI solutions for text generation, coding, image creation, audio tools, and education">
+    <meta name="keywords" content="AI tools, artificial intelligence, text generation, coding assistance, image generation, audio tools, education">
+    <link rel="icon" href="favicon_io/faviconpro.png" type="image/x-icon">
+    <title>AIDecoded - Your AI Tools Directory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: linear-gradient(135deg, #1e1e30, #2a2a40);
+            --header-bg: linear-gradient(135deg, #141e30, #243b55);
+            --card-bg: #2b3e50;
+            --nav-bg: #141e30;
+            --primary-text: #f0f0f0;
+            --accent-color: #f0c040;
+            --accent-hover: #ff6f61;
+            --button-color: #ff6f61;
+            --button-hover: #ff8e81;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--primary-bg);
+            color: var(--primary-text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        header {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: var(--header-bg);
+            color: #fff;
+            position: relative;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin: 0;
+        }
+
+        header p {
+            margin-top: 0.5rem;
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            padding: 0 10px;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--nav-bg);
+            z-index: 1000;
+            padding: 0.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            width: 100%;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        nav a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-hover);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-toggle {
+            display: none;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .search-container {
+            display: flex;
+            margin: 1.5rem auto;
+            max-width: 500px;
+            padding: 0 1rem;
+            position: relative;
+        }
+
+        .search-container input {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+            transition: box-shadow 0.3s ease;
+            width: 100%;
+        }
+
+        .search-container input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--accent-color);
+        }
+
+        .search-container button {
+            padding: 10px 15px;
+            background: var(--button-color);
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .search-container button:hover {
+            background: var(--button-hover);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .category {
+            margin-bottom: 2.5rem;
+            scroll-margin-top: 70px; /* For smooth scrolling with sticky header */
+        }
+
+        .category h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-icon {
+            font-size: 1.5rem;
+        }
+
+        .tools {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .tool {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tool:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .tool h3 {
+            color: var(--accent-color);
+            margin: 0 0 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .tool p {
+            margin: 10px 0;
+            flex-grow: 1;
+        }
+
+        .tool-rating {
+            color: gold;
+            margin-bottom: 10px;
+        }
+
+        .tool a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: var(--button-color);
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            text-align: center;
+        }
+
+        .tool a:hover {
+            background: var(--button-hover);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--button-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.3s ease, background 0.3s ease;
+            pointer-events: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .back-to-top:hover {
+            background: var(--button-hover);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: var(--nav-bg);
+            color: #fff;
+            font-size: 0.9rem; margin-top: 2rem;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0.5rem auto;
+            max-width: 600px;
+            line-height: 1.5;
+        }
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 40px; /* Adjust based on your toggle height */
+                left: 0;
+                right: 0;
+                background: var(--nav-bg);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 0.5rem;
+                display: none;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                width: 100%;
+                text-align: center;
+                padding: 10px;
+            }
+            
+            .tools {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            
+            .tool {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+            
+            .tool h3 {
+                font-size: 1rem;
+            }
+            
+            .tool p {
+                margin: 5px 0;
+                font-size: 0.85rem;
+            }
+            
+            .tool a {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* Small mobile devices */
+        @media (max-width: 576px) {
+            .tools {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            
+            .tool {
+                padding: 10px;
+                font-size: 0.8rem;
+            }
+            
+            .category h2 {
+                font-size: 1.4rem;
+            }
+            
+            .container {
+                padding: 0 10px;
+            }
+            
+            .search-container {
+                flex-direction: row;
+                padding: 0 0.5rem;
+            }
+            
+            .search-container input,
+            .search-container button {
+                padding: 8px 10px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Special horizontal scrolling for very small screens to maintain 3 columns */
+        @media (max-width: 480px) {
+            .tools-container {
+                overflow-x: auto;
+                padding-bottom: 10px;
+                margin: 0 -10px;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+            }
+            
+            .tools {
+                width: 180%;
+                padding: 0 10px;
+                min-width: min-content;
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .tool {
+                scroll-snap-align: start;
+                min-width: 150px;
+            }
+            
+            /* Scrolling indicator */
+            .scroll-indicator {
+                text-align: center;
+                margin-top: 5px;
+                font-size: 0.8rem;
+                color: var(--accent-color);
+                display: block;
+            }
+        }
+        
+        .search-container {
+    display: flex;
+    margin: 1.5rem auto;
+    max-width: 500px;
+    padding: 0 1rem;
+    position: relative; /* Added for clear button positioning */
+}
+
+.search-container input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    font-size: 1rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.search-container input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+.search-container button {
+    padding: 10px 15px;
+    background: var(--button-color);
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background: var(--button-hover);
+}
+
+/* Animation for search results */
+.tool {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tool-visible {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+/* Highlight matching text (optional enhancement) */
+.highlight {
+    background-color: rgba(240, 192, 64, 0.3);
+    padding: 0 2px;
+    border-radius: 3px;
+}
+
+/* Add styles for keyboard shortcut hint */
+.search-shortcut-hint {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #999;
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+}
+
+/* Style for no results message */
+.no-results {
+    padding: 2rem;
+    text-align: center;
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    animation: fadeIn 0.3s ease forwards;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AIDecoded</h1>
+        <p>Your one-stop platform for exploring cutting-edge AI solutions!</p>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="menu-toggle" aria-label="Toggle navigation menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="nav-links">
+                <a href="#text-generation" aria-label="Go to Text Generation section"><i class="fas fa-pen"></i> Text</a>
+                <a href="#coding-assistance" aria-label="Go to Coding section"><i class="fas fa-code"></i> Coding</a>
+                <a href="#image-generation" aria-label="Go to Image Generation section"><i class="fas fa-image"></i> Images</a>
+                <a href="#audio-tools" aria-label="Go to Audio tools section"><i class="fas fa-headphones"></i> Audio</a>
+                <a href="#education" aria-label="Go to Education section"><i class="fas fa-graduation-cap"></i> Education</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Find AI tools..." aria-label="Search">
+        <button id="search-button" type="button">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+
+        <!-- Text Generation -->
+        <div class="category" id="text-generation">
+            <h2><i class="fas fa-pen category-icon"></i> Text Generation</h2>
+            <div class="tools">
+                <div class="tool" data-tags="chatbot ai conversation">
+                    <h3>ChatGPT</h3>
+                    <div class="tool-rating" aria-label="Rating: 5 out of 5 stars">★★★★★</div>
+                    <p>Description: Advanced multimodal AI for drafting content, coding, and data analysis. Supports image inputs and contextual memory.
+                        <br> 
+                        Pros:<br>
+                        Free tier (GPT-4o Mini) and paid plans. <br> 
+                        50+ languages and API integration.<br> 
+                        Ideal for developers, writers, and educators.</p>
+                    <a href="https://chat.openai.com/" target="_blank" rel="noopener noreferrer">Learn ChatGPT</a>
+                </div>
+                <div class="tool" data-tags="marketing content writer">
+                    <h3>Jasper</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: Marketing-focused tool for blogs, ads, and SEO content with brand-voice customization.
+                        <br> 
+                        Pros:<br>
+                        50+ templates (AIDA, PAS frameworks).<br>
+                        Surfer SEO integration for keyword optimization.<br>
+                        Team collaboration features.</p>
+                    <a href="https://www.jasper.ai/" target="_blank" rel="noopener noreferrer">Learn Jasper</a>
+                </div>
+                <div class="tool" data-tags="seo writing articles">
+                    <h3>Writesonic</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p> Description: Long-form articles, ads, and landing page copy.
+                        <br> 
+                        Pros:<br>
+                        GPT-4 integration.<br>
+                        Built-in plagiarism checker.<br>
+                        1-click WordPress publishing.</p>
+                    <a href="https://writesonic.com/" target="_blank" rel="noopener noreferrer">Learn Writesonic</a>
+                </div>
+                <div class="tool" data-tags="social media captions content">
+                    <h3>Copy.ai</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: Generates social media captions, emails, and product descriptions.
+                        <br> 
+                        Pros:<br>
+                        Free plan (2,000 words/month).<br>
+                        Simple interface for non-technical users.<br>
+                        Supports 25+ languages.</p>
+                    <a href="https://www.copy.ai/" target="_blank" rel="noopener noreferrer">Learn Copy.ai</a>
+                </div>
+                <div class="tool" data-tags="blog content writer">
+                    <h3>Rytr</h3>
+                    <div class="tool-rating" aria-label="Rating: 3.5 out of 5 stars">★★★⯪☆</div>
+                    <p>Description: Budget-friendly AI for blogs, emails, and stories.
+                        <br> 
+                        Pros:<br>
+                        20+ tones of voice.<br>
+                        Free plan (10k characters/month).<br>
+                        Built-in SEO audit.</p>
+                    <a href="https://rytr.me/" target="_blank" rel="noopener noreferrer">Learn Rytr</a>
+                </div>
+                <div class="tool" data-tags="stories fiction creative writing">
+                    <h3>Sudowrite</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: AI writing assistant for fiction and storytelling. Helps authors draft novels, scripts, and poetry with creative tools.
+                        <br> 
+                        Pros:<br>
+                        Genre-specific templates (mystery, sci-fi, romance).<br>
+                        Tools like "Twist" (plot ideas) and "Describe" (vivid settings).<br>
+                        Free trial (7 days, 10k words).<br>
+                        Privacy-focused with encrypted drafts.</p>
+                    <a href="https://www.sudowrite.com/" target="_blank" rel="noopener noreferrer">Learn Sudowrite</a>
+                </div>
+                <div class="tool" data-tags="chatbot ai conversation">
+                    <h3>Claude</h3>
+                    <div class="tool-rating" aria-label="Rating: 5 out of 5 stars">★★★★★</div>
+                    <p> Description: Ethical AI for technical writing, code reviews, and complex reasoning.
+                        <br>
+                        Pros:<br>
+                        100K token context window.<br>
+                        Minimal hallucination risk.<br>
+                        Strong bias mitigation.</p>
+                    <a href="https://claude.ai/new" target="_blank" rel="noopener noreferrer">Learn Claude</a>
+                </div>
+                <div class="tool" data-tags="chatbot ai conversation">
+                    <h3>AI Document Creator</h3>
+                    <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                    <p> Description: Generates reports, resumes, and presentations.
+                        <br>
+                        Pros:<br>
+                        GPT-4 integration.<br>
+                        Customizable templates.<br>
+                        Export to PDF/DOCX.</p>
+                    <a href="https://www.aidocmaker.com/" target="_blank" rel="noopener noreferrer">Learn AI Document Creator</a>
+                </div>
+                <div class="tool" data-tags="text-generation readability editing">
+                    <h3>Wordtune</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p> Description: Rewrites sentences for readability.  
+                      <br>
+                      Pros:<br>
+                      Tone adjustments.<br>
+                      Summarization.<br>
+                      Spices feature.</p>
+                    <a href="https://www.wordtune.com/" target="_blank" rel="noopener noreferrer">Learn WordTune</a>
+                </div>
+                <div class="tool" data-tags="text-generation autocomplete emails">
+                    <h3>HyperWrite</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: Autocompletes sentences and drafts emails.  
+                      <br>
+                      Pros:<br>
+                      Chrome extension.<br>
+                      Personalization tools.<br>
+                      Research assistant.</p>
+                    <a href="https://hyperwriteai.com/" target="_blank" rel="noopener noreferrer">Learn HyperWrite</a>
+                </div>
+                <div class="tool" data-tags="text-generation e-commerce ads">
+                    <h3>CopySmith</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: E-commerce product descriptions and ad copy.  
+                      <br>
+                      Pros:<br>
+                      Shopify integration.<br>
+                      Bulk generation.<br>
+                      Competitor analysis.</p>
+                    <a href="https://copysmith.ai/" target="_blank" rel="noopener noreferrer">Learn CopySmith</a>
+                </div>
+                <div class="tool" data-tags="text-generation seo research">
+                    <h3>Frase</h3>
+                    <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                    <p>Description: Combines SEO research with content drafting.  
+                          <br>
+                          Pros:<br>
+                          Content briefs.<br>
+                          Competitor analysis.<br>
+                          AI writer.</p>
+                    <a href="https://www.frase.io/" target="_blank" rel="noopener noreferrer">Learn Frase</a>
+                </div>                      
+                <div class="tool" data-tags="text-generation paraphrasing grammar">
+                    <h3>QuillBot</h3>
+                    <div class="tool-rating" aria-label="Rating: 5 out of 5 stars">★★★★★</div>
+                    <p>Description: Paraphrasing and grammar-checking tool.  
+                          <br>
+                          Pros:<br>
+                          7 writing modes.<br>
+                          Plagiarism checker.<br>
+                          Co-Writer integration.</p>
+                    <a href="https://quillbot.com/" target="_blank" rel="noopener noreferrer">Learn QuillBot</a>
+                </div>
+                <div class="tool" data-tags="text-generation transcription summary">
+                     <h3>Notta</h3>
+                    <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                    <p>Description: Transcribes and summarizes audio/video content.  
+                          <br>
+                          Pros:<br>
+                          98% accuracy.<br>
+                          Export to text/PDF.<br>
+                          Multi-speaker detection.</p>
+                    <a href="https://www.notta.ai/" target="_blank" rel="noopener noreferrer">Learn Notta</a>
+                </div>
+                <div class="tool" data-tags="text-generation marketing predictive">
+                    <h3>Anyword</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: Predictive performance scoring for marketing content.  
+                          <br>
+                          Pros:<br>
+                          Audience targeting.<br>
+                          A/B testing insights.<br>
+                          ROI tracking.</p>
+                    <a href="https://anyword.com/" target="_blank" rel="noopener noreferrer">Learn Anyword</a>
+                </div>
+                <div class="tool" data-tags="research academic technical">
+                    <h3>DeepSeek</h3>
+                    <div class="tool-rating" aria-label="Rating: 5 out of 5 stars">★★★★★</div>
+                    <p>Description: AI-powered search engine for academic papers, patents, and technical documents.  
+                      <br>
+                      Pros:<br>
+                      Semantic search for precise results.<br>
+                      Citation graph analysis.<br>
+                      Integration with arXiv, PubMed, etc.</p>
+                    <a href="https://www.deepseek.com/" target="_blank" rel="noopener noreferrer">Learn Deepseek</a>
+                </div>
+                <div class="tool" data-tags="text-generation real-time">
+                    <h3>Grok</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: AI chatbot with access to X (Twitter) data.  
+                      <br>
+                      Pros:<br>
+                      Research AI.<br>
+                      Live knowledge integration on X (Twitter).<br>
+                      Creative outputs.</p>
+                    <a href="https://grok.x.ai/" target="_blank" rel="noopener noreferrer">Learn Grok</a>
+                </div>
+                <div class="tool" data-tags="multimodal coding research productivity">
+                    <h3>Google Gemini</h3>
+                    <div class="tool-rating" aria-label="Rating: 5 out of 5 stars">★★★★★</div>
+                    <p>Description: Advanced multimodal AI for coding, content creation, and data analysis.  
+                      <br>
+                      Pros:<br>
+                      Code repo analysis & optimization. <br>
+                      Integration with Docs/Sheets/Gmail.<br>
+                      Imagen 3 image generation.<br>
+                      1M token context for large documents.</p>
+                    <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Learn Gemini</a>
+                  </div>
+                <!-- Add more text generation tools with the same enhanced structure -->
+            </div>
+        </div>
+
+        <!-- Coding Assistance -->
+        <div class="category" id="coding-assistance">
+            <h2><i class="fas fa-code category-icon"></i> Coding Assistance</h2>
+            <div class="tools">
+                <div class="tool" data-tags="programming developer github">
+                    <h3>GitHub Copilot</h3>
+                    <div class="tool-rating" aria-label="Rating: 5 out of 5 stars">★★★★★</div>
+                    <p>Description: Code autocompletion and snippet generation.  
+                        <br>
+                        Pros:<br>
+                        VS Code/IDE integration.<br>
+                        Multi-language support.<br>
+                        Test case generation.</p></p>
+                    <a href="https://github.com/features/copilot" target="_blank" rel="noopener noreferrer">Learn GitHub Copilot</a>
+                </div>
+                <div class="tool" data-tags="coding collaboration ide">
+                    <h3>Replit Ghostwriter</h3>
+                    <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                    <p>Description: Collaborative coding environment with AI assistance.  
+                      <br>
+                      Pros:<br>
+                      Real-time pair programming.<br>
+                      Debugging tools.<br>
+                      Free tier for students.</p>
+                    <a href="https://replit.com/site/ai" target="_blank" rel="noopener noreferrer">Learn Replit Ghostwriter</a>
+                </div>
+                  <div class="tool" data-tags="coding autocomplete ide">
+                    <h3>Tabnine</h3>
+                    <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                    <p>Description: Supports 20+ languages with context-aware suggestions.  
+                      <br>
+                      Pros:<br>
+                      Local model option.<br>
+                      Privacy-focused.<br>
+                      Team permissions.</p>
+                    <a href="https://www.tabnine.com/" target="_blank" rel="noopener noreferrer">Learn Tabnine</a>
+                </div>
+                  <div class="tool" data-tags="coding security aws">
+                    <h3>Amazon CodeWhisperer</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: Security-focused code generator.  
+                      <br>
+                      Pros:<br>
+                      AWS integration.<br>
+                      Vulnerability scanning.<br>
+                      Open-source compliance.</p>
+                    <a href="https://aws.amazon.com/codewhisperer/" target="_blank" rel="noopener noreferrer">Learn Amazon CodeWhisperer</a>
+                </div>
+                <div class="tool" data-tags="coding autocomplete ide">
+                    <h3>Codeium</h3>
+                    <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                    <p>Description: AI-powered code completion and generation for developers.  
+                      <br>
+                      Pros:<br>
+                      70+ language support.<br>
+                      Free tier for individuals.<br>
+                      VS Code/JetBrains plugins.</p>
+                    <a href="https://www.codeium.com/" target="_blank" rel="noopener noreferrer">Learn Codeium</a>
+                  </div>
+                <!-- More coding tools with similar format -->
+                <!-- Keep structure consistent with other tool entries -->
+            </div>
+        </div>
+
+        <!-- Image Generation -->
+        <div class="category" id="image-generation">
+            <h2><i class="fas fa-image category-icon"></i> Image Generation</h2>
+            <div class="tools">
+                <div class="tool" data-tags="text-to-image openai photorealistic">
+                  <h3>DALL-E 3 (OpenAI)</h3>
+                  <div class="tool-rating" aria-label="Rating: 5 out of 5 stars">★★★★★</div>
+                  <p>Description: Creates photorealistic and artistic images from text.
+                    <br>
+                    Pros:<br>
+                    1024x1024 resolution.<br>
+                    Commercial usage rights.<br>
+                    ChatGPT integration.</p>
+                  <a href="https://labs.openai.com/" target="_blank" rel="noopener noreferrer">Learn DALL-E</a>
+                </div>
+                <div class="tool" data-tags="discord concept-art surreal">
+                  <h3>MidJourney</h3>
+                  <div class="tool-rating" aria-label="Rating: 5 out of 5 stars">★★★★★</div>
+                  <p>Description: Discord-based tool for surreal/concept art.
+                    <br>
+                    Pros:<br>
+                    Vibrant, detailed outputs.<br>
+                    Active community.<br>
+                    Style customization.</p>
+                  <a href="https://midjourney.com/" target="_blank" rel="noopener noreferrer">Learn MidJourney</a>
+                </div>
+                <div class="tool" data-tags="open-source developer-api customization">
+                  <h3>Stable Diffusion</h3>
+                  <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                  <p>Description: Open-source model for developers.
+                    <br>
+                    Pros:<br>
+                    Customizable via APIs. <br>
+                    Self-hosted options. <br>
+                    Large developer community.</p>
+                  <a href="https://stability.ai/" target="_blank" rel="noopener noreferrer">Learn Stable Diffusion</a>
+                </div>
+                <div class="tool" data-tags="video-editing inpainting animation">
+                  <h3>Runway</h3>
+                  <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                  <p>Description: Video/image editor with AI magic tools.
+                    <br>
+                    Pros:<br>
+                    Motion Brush for animations.<br>
+                    Green screen removal.<br>
+                    Free tier available.</p>
+                  <a href="https://runwayml.com/" target="_blank" rel="noopener noreferrer">Learn Runway</a>
+                </div>
+                <div class="tool" data-tags="social-media templates drag-and-drop">
+                    <h3>Canva Magic Media</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: Simplified design tool for social media graphics.
+                      <br>
+                      Pros:<br>
+                      Drag-and-drop interface.<br>
+                      Brand kit integration.<br>
+                      100M+ stock assets.</p>
+                    <a href="https://www.canva.com/magic-media/" target="_blank" rel="noopener noreferrer">Learn Canva Magic Media</a>
+                  </div>
+
+                  <div class="tool" data-tags="marketing branding social-media">
+                    <h3>Jasper Art</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: Brand-aligned visuals for marketers.
+                      <br>
+                      Pros:<br>
+                      Style consistency.<br>
+                      Resizes for social platforms.<br>
+                      Commercial licenses.</p>
+                    <a href="https://www.jasper.ai/art" target="_blank" rel="noopener noreferrer">Learn Jasper Art</a>
+                  </div>
+
+                  <div class="tool" data-tags="collaborative blending portraits">
+                    <h3>Artbreeder</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: Blends images for unique creations.
+                      <br>
+                      Pros:<br>
+                      Genome-based editing.<br>
+                      Collaborative remixing.<br>
+                      Portrait/landscape focus.</p>
+                    <a href="https://www.artbreeder.com/" target="_blank" rel="noopener noreferrer">Learn Artbreeder</a>
+                  </div>
+
+                  <div class="tool" data-tags="community art print-on-demand">
+                    <h3>NightCafe</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: Community-driven art generation.
+                      <br>
+                      Pros:<br>
+                      Daily challenges.<br>
+                      Print-on-demand options.<br>
+                      Credit-based pricing.</p>
+                    <a href="https://nightcafe.studio/" target="_blank" rel="noopener noreferrer">Learn NightCafe</a>
+                  </div>
+
+                  <div class="tool" data-tags="api custom-workflows art-styles">
+                    <h3>DeepAI</h3>
+                    <div class="tool-rating" aria-label="Rating: 4.2 out of 5 stars">★★★★☆</div>
+                    <p>Description: API integration for custom workflows.
+                      <br>
+                      Pros:<br>
+                      Custom model training.<br>
+                      10+ art styles.<br>
+                      Affordable pay-per-use.</p>
+                    <a href="https://deepai.org/" target="_blank" rel="noopener noreferrer">Learn DeepAI</a>
+                  </div>
+
+                  <div class="tool" data-tags="fine-tuning inpainting outpainting">
+                    <h3>DreamStudio</h3>
+                    <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                    <p>Description: Fine-tuned control over diffusion models.
+                      <br>
+                      Pros:<br>
+                      Adjust creativity sliders.<br>
+                      Inpainting/outpainting.<br>
+                      Free trial credits.</p>
+                    <a href="https://dreamstudio.ai/" target="_blank" rel="noopener noreferrer">Learn DreamStudio</a>
+                  </div>
+
+                  <div class="tool" data-tags="photo-editing background-remover retouching">
+                    <h3>Fotor</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: Photo editor with AI enhancements.
+                      <br>
+                      Pros:<br>
+                      Background remover.<br>
+                      AI portrait retouching.<br>
+                      Collage maker.</p>
+                    <a href="https://www.fotor.com/" target="_blank" rel="noopener noreferrer">Learn Fotor</a>
+                  </div>
+
+                  <div class="tool" data-tags="templates collaboration social-media">
+                    <h3>Picsart</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: Template-based designs for social media.
+                      <br>
+                      Pros:<br>
+                      1M+ templates.<br>
+                      AI remove/replace tools.<br>
+                      Team collaboration.</p>
+                    <a href="https://picsart.com/" target="_blank" rel="noopener noreferrer">Learn Picsart</a>
+                  </div>
+
+                  <div class="tool" data-tags="avatars video multilingual">
+                    <h3>Synthesia Avatar Studio</h3>
+                    <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                    <p>Description: Customizable AI avatars for videos.
+                      <br>
+                      Pros:<br>
+                      50+ premade avatars.<br>
+                      120+ languages/accents.<br>
+                      GDPR compliance.</p>
+                    <a href="https://www.synthesia.io/avatar-studio" target="_blank" rel="noopener noreferrer">Learn More</a>
+                  </div>
+                  <div class="tool" data-tags="ethical photoshop commercial-safe">
+                    <h3>Adobe Firefly</h3>
+                    <div class="tool-rating" aria-label="Rating: 5 out of 5 stars">★★★★★</div>
+                    <p>Description: Ethically trained image generator.
+                      <br>
+                      Pros:<br>
+                      Integration with Photoshop.<br>
+                      Generative Fill tool.<br>
+                      Commercial-safe assets.</p>
+                    <a href="https://www.adobe.com/firefly.html" target="_blank" rel="noopener noreferrer">Learn Adobe Firefly</a>
+                  </div>
+                  <div class="tool" data-tags="free concept-art quick">
+                    <h3>Craiyon</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: Free tool for quick concept art.
+                      <br>
+                      Pros:<br>
+                      No sign-up required.<br>
+                      9-image grids per prompt.<br>
+                      Fast generation.</p>
+                    <a href="https://www.craiyon.com/" target="_blank" rel="noopener noreferrer">Learn Craiyon</a>
+                  </div>
+                <!-- More image generation tools with similar format -->
+            </div>
+        </div>
+
+        <!-- Audio Tools -->
+        <div class="category" id="audio-tools">
+            <h2><i class="fas fa-headphones category-icon"></i> Audio Tools</h2>
+            <div class="tools">
+                <div class="tool" data-tags="voice-changer streaming discord">
+                    <h3>Voicemod</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: Real-time voice changer for streaming.
+                      <br>
+                      Pros:<br>
+                      80+ voice filters.<br>
+                      Integrates with Discord/OBS.<br>
+                      Free version available.</p>
+                    <a href="https://www.voicemod.net/" target="_blank" rel="noopener noreferrer">Learn Voicemod</a>
+                  </div>
+                <div class="tool" data-tags="avatar video multilingual">
+                    <h3>Synthesia</h3>
+                    <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                    <p>Description: AI avatar videos with voiceovers.
+                      <br>
+                      Pros:<br>
+                      120+ languages.<br>
+                      Custom avatars.<br>
+                      Enterprise security.</p>
+                    <a href="https://synthesia.io/" target="_blank" rel="noopener noreferrer">Learn Synthesia</a>
+                  </div>
+                  <div class="tool" data-tags="podcast editing transcription">
+                    <h3>Descript</h3>
+                    <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                    <p>Description: Edit audio via text transcripts.
+                      <br>
+                      Pros:<br>
+                      Filler word removal.<br>
+                      Overdub voice cloning.<br>
+                      Multi-track editing.</p>
+                    <a href="https://www.descript.com/" target="_blank" rel="noopener noreferrer">Learn Descript</a>
+                  </div>
+                  <div class="tool" data-tags="dubbing voice-actors narration">
+                    <h3>Lovo.ai</h3>
+                    <div class="tool-rating" aria-label="Rating: 3.5 out of 5 stars">★★★⯪☆</div>
+                    <p>Description: 500+ AI voices for dubbing/narration.
+                      <br>
+                      Pros:<br>
+                      Emotion/style control.<br>
+                      Video sync for lip movements.<br>
+                      Free tier (10 mins/month).</p>
+                    <a href="https://lovo.ai/" target="_blank" rel="noopener noreferrer">Learn Lovo</a>
+                  </div>
+                  <div class="tool" data-tags="text-to-speech voice-cloning accents">
+                    <h3>Murf.ai</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: Text-to-speech with natural voices.
+                      <br>
+                      Pros:<br>
+                      120+ voices/accents.<br>
+                      Voice cloning (paid).<br>
+                      Pitch/speed adjustments.</p>
+                    <a href="https://murf.ai/" target="_blank" rel="noopener noreferrer">Learn Murf</a>
+                  </div>
+                  <div class="tool" data-tags="embeddable analytics monetization">
+                    <h3>Listnr</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: Embeddable audio players for websites.
+                      <br>
+                      Pros:<br>
+                      Customizable widgets.<br>
+                      Analytics dashboard.<br>
+                      Monetization options.</p>
+                    <a href="https://www.listnr.tech/" target="_blank" rel="noopener noreferrer">Learn Listnr</a>
+                  </div>
+                  <div class="tool" data-tags="enterprise voice-cloning api">
+                    <h3>Play.ht</h3>
+                    <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                    <p>Description: Enterprise-grade voice cloning.
+                      <br>
+                      Pros:<br>
+                      Ultra-realistic voices.<br>
+                      SSML support.<br>
+                      API for developers.</p>
+                    <a href="https://play.ht/" target="_blank" rel="noopener noreferrer">Learn Play.ht</a>
+                  </div>
+                  <div class="tool" data-tags="tts ivr real-time">
+                    <h3>Amazon Polly</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: Neural TTS for apps/IVR systems.
+                      <br>
+                      Pros:<br>
+                      Real-time streaming.<br>
+                      60+ languages.<br>
+                      Pay-as-you-go pricing.</p>
+                    <a href="https://aws.amazon.com/polly/" target="_blank" rel="noopener noreferrer">Learn Amazon Polly</a>
+                  </div>
+                  <div class="tool" data-tags="custom-intonation ssml deployment">
+                    <h3>IBM Watson Text to Speech</h3>
+                    <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                    <p>Description: Customizable intonation/pauses.
+                      <br>
+                      Pros:<br>
+                      Expressive SSML control.<br>
+                      Private deployment.<br>
+                      Free tier (10k chars/month).</p>
+                    <a href="https://www.ibm.com/watson/text-to-speech" target="_blank" rel="noopener noreferrer">Learn IBM Watson</a>
+                  </div>
+                  <div class="tool" data-tags="music-composition royalty-free midi">
+                    <h3>AIVA</h3>
+                    <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                    <p>Description: Composes original music tracks.
+                      <br>
+                      Pros:<br>
+                      10+ genres (classical, EDM).<br>
+                      Royalty-free licensing.<br>
+                      MIDI export.</p>
+                    <a href="https://www.aiva.ai/" target="_blank" rel="noopener noreferrer">Learn AIVA</a>
+                  </div>
+                  <div class="tool" data-tags="music-creation spotify royalty-free">
+                    <h3>Boomy</h3>
+                    <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                    <p>Description: Generates royalty-free music.
+                      <br>
+                      Pros:<br>
+                      1-click song creation.<br>
+                      Submit to Spotify/Apple Music.<br>
+                      Free tier (25 songs).</p>
+                    <a href="https://boomy.com/" target="_blank" rel="noopener noreferrer">Learn Boomy</a>
+                  </div>
+                  <div class="tool" data-tags="audio-to-text summarization chrome">
+                    <h3>VoicePen</h3>
+                    <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                    <p>Description: Converts audio notes into blog posts.
+                      <br>
+                      Pros:<br>
+                      Summarizes key points.<br>
+                      Supports 30+ languages.<br>
+                      Chrome extension.</p>
+                    <a href="https://voicepen.com/" target="_blank" rel="noopener noreferrer">Learn VoicePen</a>
+                  </div>
+                <!-- More audio tools with similar format -->
+            </div>
+        </div>
+
+        <!-- Education Tools -->
+        <div class="category" id="education">
+            <h2><i class="fas fa-graduation-cap category-icon"></i> Education Tools</h2>
+            <div class="tools">
+            <div class="tool" data-tags="lesson plans curriculum education">
+                <h3>MagicSchool.ai</h3>
+                <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                <p>Description: Generates lesson plans, rubrics, and IEPs.
+                  <br>
+                  Pros:<br>
+                  Saves 10+ hours/week.<br>
+                  Aligns with Common Core.<br>
+                  Free tier available.</p>
+                <a href="https://www.magicschool.ai/" target="_blank" rel="noopener noreferrer">Learn MagicSchool.ai</a>
+            </div>
+              <div class="tool" data-tags="templates infographics classroom">
+                <h3>Canva Magic</h3>
+                <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                <p>Description: Classroom posters, infographics, and videos.
+                  <br>
+                  Pros:<br>
+                  500k+ educational templates.<br>
+                  Drag-and-drop simplicity.<br>
+                  Group assignments.</p>
+                <a href="https://www.canva.com/education/" target="_blank" rel="noopener noreferrer">Learn Canva Magic</a>
+            </div>
+              <div class="tool" data-tags="writing plagiarism-check feedback">
+                <h3>Grammarly</h3>
+                <div class="tool-rating" aria-label="Rating: 5 out of 5 stars">★★★★★</div>
+                <p>Description: Writing feedback for students/teachers.
+                  <br>
+                  Pros:<br>
+                  Plagiarism checker.<br>
+                  Tone adjustments.<br>
+                  Schoolwide licenses.</p>
+                <a href="https://www.grammarly.com/" target="_blank" rel="noopener noreferrer">Learn Grammarly</a>
+            </div>
+              <div class="tool" data-tags="quizzes analytics google-classroom">
+                <h3>Quizizz</h3>
+                <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                <p>Description: Interactive quizzes with memes/leaderboards.
+                  <br>
+                  Pros:<br>
+                  30M+ prebuilt questions.<br>
+                  Google Classroom sync.<br>
+                  Real-time analytics.</p>
+                <a href="https://quizizz.com/" target="_blank" rel="noopener noreferrer">Learn Quizizz</a>
+            </div>
+              <div class="tool" data-tags="gamified learning lms">
+                <h3>Kahoot!</h3>
+                <div class="tool-rating" aria-label="Rating: 5 out of 5 stars">★★★★★</div>
+                <p>Description: Gamified learning modules.
+                  <br>
+                  Pros:<br>
+                  100M+ ready-made games.<br>
+                  Student-paced challenges.<br>
+                  LMS integrations.</p>
+                <a href="https://kahoot.com/" target="_blank" rel="noopener noreferrer">Learn Kahoot!</a>
+             </div>
+              <div class="tool" data-tags="differentiated-instruction multilingual iep">
+                <h3>Eduaide</h3>
+                <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                <p>Description: Differentiated instruction resources.
+                  <br>
+                  Pros:<br>
+                  Scaffolding worksheets.<br>
+                  Multilingual support.<br>
+                  IEP compliance tools.</p>
+                <a href="https://www.eduaide.ai/" target="_blank" rel="noopener noreferrer">Learn Eduaide</a>
+            </div>
+              <div class="tool" data-tags="interactive-slides critical-thinking polls">
+                <h3>Curipod</h3>
+                <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                <p>Description: Interactive slides for critical thinking.
+                  <br>
+                  Pros:<br>
+                  Polls and word clouds.<br>
+                  Export to Google Slides.<br>
+                  Standards-aligned.</p>
+                <a href="https://curipod.com/" target="_blank" rel="noopener noreferrer">Learn Curipod</a>
+            </div>
+              <div class="tool" data-tags="neurodivergent task-management todo">
+                <h3>Goblin Tools</h3>
+                <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                <p>Description: Breaks tasks into manageable steps.
+                  <br>
+                  Pros:<br>
+                  Ideal for neurodivergent students.<br>
+                  To-do list generator.<br>
+                  Free/no ads.</p>
+                <a href="https://goblin.tools/" target="_blank" rel="noopener noreferrer">Learn Goblin Tools</a>
+            </div>
+              <div class="tool" data-tags="feedback automation chrome">
+                <h3>Brisk Teaching</h3>
+                <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                <p>Description: Chrome extension for feedback automation.
+                  <br>
+                  Pros:<br>
+                  Rubric generator.<br>
+                  Google Docs integration.<br>
+                  Detects AI-written essays.</p>
+                <a href="https://www.briskteaching.com/" target="_blank" rel="noopener noreferrer">Learn Brisk Teaching</a>
+            </div>
+              <div class="tool" data-tags="reading-levels spanish vocabulary">
+                <h3>Diffit</h3>
+                <div class="tool-rating" aria-label="Rating: 4 out of 5 stars">★★★★☆</div>
+                <p>Description: Adapts content for reading levels.
+                  <br>
+                  Pros:<br>
+                  English/Spanish support.<br>
+                  Vocabulary leveling.<br>
+                  Export to Google Forms.</p>
+                <a href="https://diffit.me/" target="_blank" rel="noopener noreferrer">Learn Diffit</a>
+            </div>
+              <div class="tool" data-tags="adaptive-learning sat-prep free">
+                <h3>Khan Academy</h3>
+                <div class="tool-rating" aria-label="Rating: 5 out of 5 stars">★★★★★</div>
+                <p>Description: Adaptive learning for K-12 and college.
+                  <br>
+                  Pros:<br>
+                  Free for all users.<br>
+                  SAT/ACT prep courses.<br>
+                  Teacher dashboards.</p>
+                <a href="https://www.khanacademy.org/" target="_blank" rel="noopener noreferrer">Learn Khan Academy</a>
+            </div>
+              <div class="tool" data-tags="certificates degrees upskilling">
+                <h3>Coursera</h3>
+                <div class="tool-rating" aria-label="Rating: 5 out of 5 stars">★★★★★</div>
+                <p>Description: AI courses from top universities.
+                  <br>
+                  Pros:<br>
+                  Certificates/degrees.<br>
+                  Financial aid available.<br>
+                  Enterprise upskilling.</p>
+                <a href="https://www.coursera.org/" target="_blank" rel="noopener noreferrer">Learn Coursera</a>
+            </div>
+              <div class="tool" data-tags="language-learning gamified schools">
+                <h3>Duolingo</h3>
+                <div class="tool-rating" aria-label="Rating: 5 out of 5 stars">★★★★★</div>
+                <p>Description: Language learning with adaptive AI.
+                  <br>
+                  Pros:<br>
+                  Bite-sized lessons.<br>
+                  Leaderboards for motivation.<br>
+                  School partnerships.</p>
+                <a href="https://www.duolingo.com/" target="_blank" rel="noopener noreferrer">Learn Duolingo</a>
+            </div>
+              <div class="tool" data-tags="flashcards study-plans offline">
+                <h3>Quizlet</h3>
+                <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                <p>Description: Flashcards and study games.
+                  <br>
+                  Pros:<br>
+                  500M+ user-generated sets.<br>
+                  AI-generated study plans.<br>
+                  Offline access.</p>
+                <a href="https://quizlet.com/" target="_blank" rel="noopener noreferrer">Learn Quizlet</a>
+            </div>
+             <div class="tool" data-tags="homework community math-solver">
+                <h3>Brainly</h3>
+                <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                <p>Description: Homework Q&A community.
+                  <br>
+                  Pros:<br>
+                  350M+ answers.<br>
+                  Expert-verified solutions.<br>
+                  Math solver with steps.</p>
+                <a href="https://brainly.com/" target="_blank" rel="noopener noreferrer">Learn Brainly</a>
+            </div>
+              <div class="tool" data-tags="video-lessons quizzes ted-ed">
+                <h3>Edpuzzle</h3>
+                <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                <p>Description: Interactive video lessons.
+                  <br>
+                  Pros:<br>
+                  Embed quizzes in videos.<br>
+                  Track student progress.<br>
+                  Prebuilt TED-Ed content.</p>
+                <a href="https://edpuzzle.com/" target="_blank" rel="noopener noreferrer">Learn Edpuzzle</a>
+            </div>
+              <div class="tool" data-tags="vr-lessons whiteboards licensing">
+                <h3>Nearpod</h3>
+                <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                <p>Description: Real-time assessments and VR field trips.
+                  <br>
+                  Pros:<br>
+                  15k+ premade lessons.<br>
+                  Collaborative whiteboards.<br>
+                  District-wide licensing.</p>
+                <a href="https://nearpod.com/" target="_blank" rel="noopener noreferrer">Learn Nearpod</a>
+            </div>
+              <div class="tool" data-tags="powerpoint quizzes gamified">
+                <h3>ClassPoint</h3>
+                <div class="tool-rating" aria-label="Rating: 4.5 out of 5 stars">★★★★⯪</div>
+                <p>Description: Turn slides into interactive quizzes.
+                  <br>
+                  Pros:<br>
+                  Gamified quizzes.<br>
+                  AI-generated questions.<br>
+                  PowerPoint/Google Slides add-on.</p>
+                <a href="https://www.classpoint.io/" target="_blank" rel="noopener noreferrer">Learn ClassPoint</a>
+            </div>
+              <div class="tool" data-tags="academic citations research">
+                <h3>Google Scholar</h3>
+                <div class="tool-rating" aria-label="Rating: 5 out of 5 stars">★★★★★</div>
+                <p>Description: Free scholarly literature search engine indexing peer-reviewed papers, theses, books, and court opinions.
+                  <br>
+                  Pros:<br>
+                  Advanced search filters (author, publication, date range) <br>
+                  Profile creation to track citations and publication <br>
+                  Integration with university libraries</p>
+                <a href="https://scholar.google.com/" target="_blank" rel="noopener noreferrer">Learn Google Scholar</a>
+            </div>
+                <!-- More education tools with similar format -->
+        </div>
+    </div>
+    
+
+    <a href="#" class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
+
+    <footer>
+        <p>© 2025 AIDecoded. All rights reserved.
+                  <p>Version 1.00</p> 
+                  <p>AIDecoded is an informative website archived of AI tools and software, carefully curated and categorized for specific tasks such as writing, citations, research, and recreational 
+                    activities. <br> AIDecoded aims to empower students to navigate the complex landscape of AI in education and leverage these tools to enhance their learning experience.</p></p>
+        <p>Want suggestions and Feedback? <a href="mailto:julian.salvador.shs@ustangelicum.edu.ph" style="color: var(--accent-color);">Contact Us!</a></p>
+    </footer>
+
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+            // For mobile devices, wrap .tools in a container for horizontal scrolling
+            if (window.innerWidth <= 480) {
+                const toolsElements = document.querySelectorAll('.tools');
+                toolsElements.forEach(toolsEl => {
+                    // Create container
+                    const container = document.createElement('div');
+                    container.className = 'tools-container';
+                    
+                    // Add scroll indicator
+                    const indicator = document.createElement('div');
+                    indicator.className = 'scroll-indicator';
+                    indicator.textContent = 'Swipe to see more →';
+                    
+                    // Replace .tools with the container
+                    const parent = toolsEl.parentNode;
+                    parent.insertBefore(container, toolsEl);
+                    container.appendChild(toolsEl);
+                    parent.insertBefore(indicator, container.nextSibling);
+                });
+            }
+            
+            // Toggle menu
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                });
+            }
+            
+            // Back to top button
+            const backToTop = document.querySelector('.back-to-top');
+            if (backToTop) {
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 300) {
+                        backToTop.classList.add('visible');
+                    } else {
+                        backToTop.classList.remove('visible');
+                    }
+                });
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+    const container = document.querySelector('.container');
+    
+    // Create a no results message element
+    const noResultsMessage = document.createElement('div');
+    noResultsMessage.className = 'no-results';
+    noResultsMessage.innerHTML = '<p>No AI tools match your search. Try different keywords.</p>';
+    noResultsMessage.style.display = 'none';
+    
+    // Append it to the container if it exists
+    if (container) {
+        container.appendChild(noResultsMessage);
+    }
+
+    // Function to filter tools based on search input
+    function filterTools() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        let matchFound = false;
+        
+        // Get all categories and tools after DOM is fully loaded
+        const categories = document.querySelectorAll('.category');
+        
+        // Show/hide categories and tools based on search term
+        categories.forEach(category => {
+            let categoryHasVisibleTools = false;
+            
+            // Get all tools in this category
+            const categoryTools = category.querySelectorAll('.tool');
+            
+            categoryTools.forEach(tool => {
+                const toolTitle = tool.querySelector('h3')?.textContent.toLowerCase() || '';
+                const toolDescription = tool.querySelector('p')?.textContent.toLowerCase() || '';
+                
+                // Check if tool matches search term
+                if (searchTerm === '' || 
+                    toolTitle.includes(searchTerm) || 
+                    toolDescription.includes(searchTerm)) {
+                    tool.style.display = '';
+                    categoryHasVisibleTools = true;
+                    matchFound = true;
+                } else {
+                    tool.style.display = 'none';
+                }
+            });
+            
+            // Show/hide category based on whether it has visible tools
+            category.style.display = categoryHasVisibleTools ? '' : 'none';
+        });
+        
+        // Show/hide no results message
+        if (noResultsMessage) {
+            noResultsMessage.style.display = matchFound ? 'none' : 'block';
+        }
+        
+        // Update URL with search parameter (for sharing or bookmarking searches)
+        if (searchTerm) {
+            const url = new URL(window.location);
+            url.searchParams.set('q', searchTerm);
+            window.history.replaceState({}, '', url);
+        } else {
+            const url = new URL(window.location);
+            url.searchParams.delete('q');
+            window.history.replaceState({}, '', url);
+        }
+    }
+
+    // Add event listeners for real-time search
+    if (searchInput) {
+        searchInput.addEventListener('input', filterTools);
+    }
+    
+    if (searchButton) {
+        searchButton.addEventListener('click', filterTools);
+    }
+    
+    // Add clear search button functionality
+    const searchContainer = document.querySelector('.search-container');
+    if (searchContainer && searchInput) {
+        const clearButton = document.createElement('button');
+        clearButton.innerHTML = '&times;';
+        clearButton.className = 'clear-search';
+        clearButton.title = 'Clear search';
+        clearButton.style.display = 'none';
+        clearButton.style.position = 'absolute';
+        clearButton.style.right = '60px';
+        clearButton.style.top = '50%';
+        clearButton.style.transform = 'translateY(-50%)';
+        clearButton.style.background = 'transparent';
+        clearButton.style.border = 'none';
+        clearButton.style.color = '#666';
+        clearButton.style.fontSize = '1.2rem';
+        clearButton.style.cursor = 'pointer';
+        
+        searchContainer.appendChild(clearButton);
+        
+        clearButton.addEventListener('click', function() {
+            searchInput.value = '';
+            clearButton.style.display = 'none';
+            filterTools();
+            searchInput.focus();
+        });
+        
+        searchInput.addEventListener('input', function() {
+            clearButton.style.display = this.value ? 'block' : 'none';
+        });
+    }
+    
+    // Check for search parameter in URL when page loads
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchQuery = urlParams.get('q');
+    if (searchQuery && searchInput) {
+        searchInput.value = searchQuery;
+        filterTools(); // Filter immediately if URL has search parameter
+    }
+    
+    // Add shortcut to focus on search (Ctrl+/ or Command+/)
+    document.addEventListener('keydown', function(e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === '/' && searchInput) {
+            e.preventDefault();
+            searchInput.focus();
+        }
+    });
+});
+
+    </script>
+   
+</body>
+</html>
